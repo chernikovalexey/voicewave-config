@@ -13,7 +13,13 @@
           "latestDefaultListenButton": "button[data-testid*=\"voice-play\"]",
           "loading": "[data-testid=\"stop-button\"]",
           "streamPlayable": true,
-          "highlightFixing": true
+          "highlightFixing": true,
+          "extraStyles": [
+            "listen-button { padding: 6px !important; }"
+          ],
+          "integrationStyles": [
+            ".controls { top: -42.5px !important; right: 0 !important; }"
+          ]
         }
       },
       {
@@ -30,7 +36,14 @@
             "[role=\"button\"] [class*=\"ds-loading\"]",
             ".ds-loading"
           ],
-          "streamPlayable": false
+          "streamPlayable": false,
+          "extraStyles": [
+            "listen-button { width: 18px !important; height: 18px !important; }",
+            "*:has(> svg [d=\"M1.00008 2.41429C0.609551 2.02376 0.609551 1.3906 1.00008 1.00008C1.3906 0.609551 2.02376 0.609551 2.41429 1.00007L8.00008 6.58586L13.5859 1.00008C13.9764 0.609551 14.6096 0.609551 15.0001 1.00008C15.3906 1.3906 15.3906 2.02376 15.0001 2.41429L8.8486 8.56576C8.37997 9.03439 7.62018 9.03439 7.15155 8.56576L1.00008 2.41429Z\"]) { top: -80px !important; right: 0 !important; }"
+          ],
+          "integrationStyles": [
+            ".controls { top: -40px !important; right: 0 !important; }"
+          ]
         }
       },
       {
@@ -42,7 +55,18 @@
           "listenButtonContainers": "*[class^=\"ChatMessage\"]:has(>[class*=\"LeftSideChatMessageHeader\"]) > [class*=\"LeftSideChatMessageHeader\"]:not(:has(listen-button))",
           "playable": "[class*=\"Message_leftSideMessageBubble\"] [class*=\"Markdown_markdownContainer\"]",
           "allPlayableNodes": "[class*=\"Message_leftSideMessageBubble\"] [class*=\"Markdown_markdownContainer\"]",
-          "loading": "button[class*=\"ChatStopMessageButton\"]"
+          "loading": "button[class*=\"ChatStopMessageButton\"]",
+          "extraStyles": [
+            "[class*=\"ChatMessageVoiceInputButton\"] { visibility: hidden; margin: 0 -7.5px; }",
+            "aside { z-index: 0; }",
+            "footer { margin-top: 20px; }",
+            "listen-button { display: flex; align-items: center; }",
+            "*[class^=\"ChatMessage\"]:has(>[class*=\"LeftSideChatMessageHeader\"]) [class*=\"DropdownMenuButton\"] > button { visibility: visible !important; }",
+            "*:has(> * > * > textarea) { position: relative !important; }"
+          ],
+          "integrationStyles": [
+            ".controls { top: -42.5px !important; right: 4px !important; }"
+          ]
         }
       },
       {
@@ -53,7 +77,14 @@
           "listenButtonContainers": ".flex > [id].group:has(.flex > div.prose) .flex:has(> button):not(:has(listen-button))",
           "playable": ".flex > div.prose",
           "allPlayableNodes": ".flex > div.prose",
-          "loading": "[class*=\"@container/message\"] .flex.w-full:has(textarea) .ml-auto button:has(.lucide-square):last-of-type"
+          "loading": "[class*=\"@container/message\"] .flex.w-full:has(textarea) .ml-auto button:has(.lucide-square):last-of-type",
+          "extraStyles": [
+            ".flex.h-fit.w-full:has(> [id]) { padding-bottom: 25px !important; }",
+            "listen-button { opacity: 0.65; }"
+          ],
+          "integrationStyles": [
+            ".controls { top: -42.5px !important; right: 0 !important; }"
+          ]
         }
       },
       {
@@ -64,7 +95,15 @@
           "listenButtonContainers": "[data-is-streaming].group .absolute > * > .items-stretch:not(:has(listen-button))",
           "playable": "[data-is-streaming]",
           "allPlayableNodes": "[data-test-render-count]",
-          "loading": "[data-is-streaming=\"true\"]"
+          "loading": "[data-is-streaming=\"true\"]",
+          "extraStyles": [
+            "*:has(> * > * > * > [contenteditable=\"true\"]) { position: relative !important; }",
+            "listen-button { padding: 7.5px 5px !important; }",
+            "listen-button svg { width: 16px !important; height: 16px !important; }"
+          ],
+          "integrationStyles": [
+            ".controls { top: -40px !important; right: 0 !important; }"
+          ]
         }
       },
       {
@@ -75,7 +114,16 @@
           "listenButtonContainers": ".flex-row > .-ml-4.flex:has(> button):not(:has(listen-button))",
           "playable": ".message-bubble[class*=\"prose\"]",
           "allPlayableNodes": ".message-bubble[class*=\"prose\"]",
-          "loading": "form button:has(.aspect-square svg):not([type=\"submit\"])"
+          "loading": "form button:has(.aspect-square svg):not([type=\"submit\"])",
+          "extraStyles": [
+            "listen-button { padding: 7px !important; }",
+            "form:has(textarea) { max-width: 800px; width: 100%; }",
+            "form:has(textarea) > *:first-child { width: 100%; }",
+            ".flex-row > .-ml-4.flex:has(> button) button { opacity: 1 !important; }"
+          ],
+          "integrationStyles": [
+            ".controls { top: -40px !important; right: 0 !important; }"
+          ]
         }
       },
       {
@@ -87,7 +135,13 @@
           "playable": "message-content .markdown-main-panel",
           "allPlayableNodes": "message-content .markdown-main-panel,user-query-content",
           "loading": "button:has([fonticon=\"stop\"])",
-          "streamPlayable": false
+          "streamPlayable": false,
+          "extraStyles": [
+            "listen-button { padding: 7px !important; margin-right: 100%; margin-top: 5px; }"
+          ],
+          "integrationStyles": [
+            ".controls { top: -40px !important; right: 0 !important; }"
+          ]
         }
       },
       {
@@ -100,7 +154,13 @@
           "playable": "[id*=\"markdown-content\"]",
           "allPlayableNodes": "[id*=\"markdown-content\"]",
           "loading": "button:has(svg[class*=\"player-stop-filled\"])",
-          "streamPlayable": false
+          "streamPlayable": false,
+          "extraStyles": [
+            "listen-button { padding: 7px !important; }"
+          ],
+          "integrationStyles": [
+            ".controls { top: -40px !important; right: 0 !important; }"
+          ]
         }
       }
     ]
