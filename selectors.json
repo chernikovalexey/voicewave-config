@@ -1,1 +1,107 @@
-{}
+{
+    "version": "1",
+    "entries": [
+      {
+        "hostnames": ["chatgpt.com", "chat.openai.com"],
+        "rules": {
+          "container": "form:has([contenteditable=\"true\"], textarea)",
+          "textarea": "[contenteditable=\"true\"]",
+          "submit": "button[data-testid=\"send-button\"]:not(:disabled)",
+          "listenButtonContainers": "[data-testid*=\"conversation-turn\"]:not(:has(listen-button)) .select-none.flex.items-center:has(button)",
+          "playable": "*[data-message-author-role]",
+          "allPlayableNodes": "*[data-message-author-role]",
+          "latestDefaultListenButton": "button[data-testid*=\"voice-play\"]",
+          "loading": "[data-testid=\"stop-button\"]",
+          "streamPlayable": true,
+          "highlightFixing": true
+        }
+      },
+      {
+        "hostnames": ["chat.deepseek.com"],
+        "rules": {
+          "container": "div.aaff8b8f",
+          "textarea": "textarea._27c9245, textarea",
+          "submit": "div.bf38813a > button[role=\"button\"]:has(div._17e543b), *:has(> * > textarea:not(.ds-textarea__textarea)) [role=\"button\"]:last-child",
+          "listenButtonContainers": "*:has(> .ds-message) > * > .ds-flex:has(> ._17e543b):not(:has(listen-button))",
+          "playable": ".ds-message",
+          "allPlayableNodes": ".ds-message",
+          "loading": [
+            "div.ec4f5d61 > button[role=\"button\"][aria-disabled=\"true\"]",
+            "[role=\"button\"] [class*=\"ds-loading\"]",
+            ".ds-loading"
+          ],
+          "streamPlayable": false
+        }
+      },
+      {
+        "hostnames": ["poe.com"],
+        "rules": {
+          "container": "*:has(> * > * > textarea)",
+          "textarea": "textarea",
+          "submit": "*:has(textarea) [class*=\"MessageSendButton\"]:not(:disabled)",
+          "listenButtonContainers": "*[class^=\"ChatMessage\"]:has(>[class*=\"LeftSideChatMessageHeader\"]) > [class*=\"LeftSideChatMessageHeader\"]:not(:has(listen-button))",
+          "playable": "[class*=\"Message_leftSideMessageBubble\"] [class*=\"Markdown_markdownContainer\"]",
+          "allPlayableNodes": "[class*=\"Message_leftSideMessageBubble\"] [class*=\"Markdown_markdownContainer\"]",
+          "loading": "button[class*=\"ChatStopMessageButton\"]"
+        }
+      },
+      {
+        "hostnames": ["chat.mistral.ai"],
+        "rules": {
+          "container": "[class*=\"@container/message\"] .flex.w-full:has(textarea)",
+          "textarea": "[class*=\"@container/message\"] .flex.w-full:has(textarea) textarea",
+          "listenButtonContainers": ".flex > [id].group:has(.flex > div.prose) .flex:has(> button):not(:has(listen-button))",
+          "playable": ".flex > div.prose",
+          "allPlayableNodes": ".flex > div.prose",
+          "loading": "[class*=\"@container/message\"] .flex.w-full:has(textarea) .ml-auto button:has(.lucide-square):last-of-type"
+        }
+      },
+      {
+        "hostnames": ["claude.ai"],
+        "rules": {
+          "container": "fieldset.flex-col *:has(> * > * > [contenteditable=\"true\"]), *:has(> * > * > * > [contenteditable=\"true\"])",
+          "textarea": "[contenteditable=\"true\"]",
+          "listenButtonContainers": "[data-is-streaming].group .absolute > * > .items-stretch:not(:has(listen-button))",
+          "playable": "[data-is-streaming]",
+          "allPlayableNodes": "[data-test-render-count]",
+          "loading": "[data-is-streaming=\"true\"]"
+        }
+      },
+      {
+        "hostnames": ["grok.com"],
+        "rules": {
+          "container": "form:has(textarea)",
+          "textarea": "form textarea",
+          "listenButtonContainers": ".flex-row > .-ml-4.flex:has(> button):not(:has(listen-button))",
+          "playable": ".message-bubble[class*=\"prose\"]",
+          "allPlayableNodes": ".message-bubble[class*=\"prose\"]",
+          "loading": "form button:has(.aspect-square svg):not([type=\"submit\"])"
+        }
+      },
+      {
+        "hostnames": ["gemini.google.com"],
+        "rules": {
+          "container": ".input-area-container:has([contenteditable=\"true\"])",
+          "textarea": ".input-area-container:has([contenteditable=\"true\"]) [contenteditable=\"true\"]",
+          "listenButtonContainers": ".buttons-container-v2:not(:has(listen-button))",
+          "playable": "message-content .markdown-main-panel",
+          "allPlayableNodes": "message-content .markdown-main-panel,user-query-content",
+          "loading": "button:has([fonticon=\"stop\"])",
+          "streamPlayable": false
+        }
+      },
+      {
+        "hostnames": ["www.perplexity.ai"],
+        "rules": {
+          "container": ".relative > * > .grow",
+          "textarea": "[contenteditable=\"true\"]",
+          "submit": "button[data-testid=\"submit-button\"]",
+          "listenButtonContainers": "[class*=\"thread\"] .flex.justify-between .flex:nth-child(2):has(button):not(:has(listen-button))",
+          "playable": "[id*=\"markdown-content\"]",
+          "allPlayableNodes": "[id*=\"markdown-content\"]",
+          "loading": "button:has(svg[class*=\"player-stop-filled\"])",
+          "streamPlayable": false
+        }
+      }
+    ]
+}
