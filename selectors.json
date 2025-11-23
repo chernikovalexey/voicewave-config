@@ -109,8 +109,8 @@
       {
         "hostnames": ["grok.com"],
         "rules": {
-          "container": "form:has(textarea)",
-          "textarea": "form textarea",
+          "container": "form:has(div[contenteditable=\"true\"])",
+          "textarea": "form div[contenteditable=\"true\"]",
           "listenButtonContainers": ".flex-row > .-ml-4.flex:has(> button):not(:has(listen-button))",
           "playable": ".message-bubble[class*=\"prose\"]",
           "allPlayableNodes": ".message-bubble[class*=\"prose\"]",
