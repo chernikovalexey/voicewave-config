@@ -1,5 +1,5 @@
 {
-    "version": "2",
+    "version": "3",
     "entries": [
       {
         "hostnames": ["chatgpt.com", "chat.openai.com"],
@@ -72,11 +72,11 @@
       {
         "hostnames": ["chat.mistral.ai"],
         "rules": {
-          "container": "[class*=\"@container/message\"] .flex.w-full:has(textarea)",
-          "textarea": "[class*=\"@container/message\"] .flex.w-full:has(textarea) textarea",
+          "container": "form:has(div[contenteditable=\"true\"])",
+          "textarea": "form div[contenteditable=\"true\"]",
           "listenButtonContainers": ".flex > [id].group:has(.flex > div.prose) .flex:has(> button):not(:has(listen-button))",
-          "playable": ".flex > div.prose",
-          "allPlayableNodes": ".flex > div.prose",
+          "playable": ".flex > div[data-message-author-role]",
+          "allPlayableNodes": ".flex > div[data-message-author-role]",
           "loading": "[class*=\"@container/message\"] .flex.w-full:has(textarea) .ml-auto button:has(.lucide-square):last-of-type",
           "extraStyles": [
             ".flex.h-fit.w-full:has(> [id]) { padding-bottom: 25px !important; }",
@@ -114,11 +114,11 @@
           "listenButtonContainers": ".flex-row > .-ml-4.flex:has(> button):not(:has(listen-button))",
           "playable": ".message-bubble[class*=\"prose\"]",
           "allPlayableNodes": ".message-bubble[class*=\"prose\"]",
-          "loading": "form button:has(.aspect-square svg):not([type=\"submit\"])",
+          "loading": "form button.group:has(.aspect-square.bg-button-filled):not([type=\"submit\"])",
           "extraStyles": [
             "listen-button { padding: 7px !important; }",
-            "form:has(textarea) { max-width: 800px; width: 100%; }",
-            "form:has(textarea) > *:first-child { width: 100%; }",
+            "form:has(div[contenteditable=\"true\") { max-width: 800px; width: 100%; }",
+            "form:has(div[contenteditable=\"true\") > *:first-child { width: 100%; }",
             ".flex-row > .-ml-4.flex:has(> button) button { opacity: 1 !important; }"
           ],
           "integrationStyles": [
