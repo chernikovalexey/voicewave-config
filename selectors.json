@@ -19,7 +19,12 @@
           ],
           "integrationStyles": [
             ".controls { top: -42.5px !important; right: 0 !important; }"
-          ]
+          ],
+          "messageRole": {
+            "rules": [
+              { "getAttributeValue": "data-message-author-role" }
+            ]
+          }
         }
       },
       {
@@ -43,7 +48,12 @@
           ],
           "integrationStyles": [
             ".controls { top: -40px !important; right: 0 !important; }"
-          ]
+          ],
+          "messageRole": {
+            "rules": [
+              { "hasClass": "d29f3d7d", "role": "user" }
+            ]
+          }
         }
       },
       {
@@ -66,7 +76,10 @@
           ],
           "integrationStyles": [
             ".controls { top: -42.5px !important; right: 4px !important; }"
-          ]
+          ],
+          "messageRole": {
+            "rules": []
+          }
         }
       },
       {
@@ -84,7 +97,12 @@
           ],
           "integrationStyles": [
             ".controls { top: -42.5px !important; right: 0 !important; }"
-          ]
+          ],
+          "messageRole": {
+            "rules": [
+              { "getAttributeValue": "data-message-author-role" }
+            ]
+          }
         }
       },
       {
@@ -103,7 +121,12 @@
           ],
           "integrationStyles": [
             ".controls { top: -40px !important; right: 0 !important; }"
-          ]
+          ],
+          "messageRole": {
+            "rules": [
+              { "hasChild": "div[data-testid=\"user-message\"]", "role": "user" }
+            ]
+          }
         }
       },
       {
@@ -123,7 +146,12 @@
           ],
           "integrationStyles": [
             ".controls { top: -40px !important; right: 0 !important; }"
-          ]
+          ],
+          "messageRole": {
+            "rules": [
+              { "tagNameEquals": "user-query-content", "role": "user" }
+            ]
+          }
         }
       },
       {
@@ -141,26 +169,34 @@
           ],
           "integrationStyles": [
             ".controls { top: -40px !important; right: 0 !important; }"
-          ]
+          ],
+          "messageRole": {
+            "rules": [
+              { "tagNameEquals": "user-query-content", "role": "user" }
+            ]
+          }
         }
       },
       {
         "hostnames": ["www.perplexity.ai"],
         "rules": {
-          "container": ".relative > * > .grow",
-          "textarea": "[contenteditable=\"true\"]",
-          "submit": "button[data-testid=\"submit-button\"]",
+          "container": "[class*=\"rounded-2xl\"]:has(#ask-input)",
+          "textarea": "#ask-input",
+          "submit": "button[data-testid=\"submit-button\"]:not(:disabled)",
           "listenButtonContainers": "[class*=\"thread\"] .flex.justify-between .flex:nth-child(2):has(button):not(:has(listen-button))",
           "playable": "[id*=\"markdown-content\"]",
           "allPlayableNodes": "[id*=\"markdown-content\"]",
-          "loading": "button:has(svg[class*=\"player-stop-filled\"])",
+          "loading": "[data-testid=\"stop-button\"]",
           "streamPlayable": false,
           "extraStyles": [
             "listen-button { padding: 7px !important; }"
           ],
           "integrationStyles": [
             ".controls { top: -40px !important; right: 0 !important; }"
-          ]
+          ],
+          "messageRole": {
+            "rules": []
+          }
         }
       }
     ]
