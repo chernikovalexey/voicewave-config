@@ -1,5 +1,5 @@
 {
-    "version": "3",
+    "version": "4",
     "entries": [
       {
         "hostnames": ["chatgpt.com", "chat.openai.com"],
@@ -30,20 +30,22 @@
       {
         "hostnames": ["chat.deepseek.com"],
         "rules": {
-          "container": "div.aaff8b8f",
-          "textarea": "textarea._27c9245, textarea",
+          "container": "div.aaff8b8f, *:has(> * > textarea.ds-textarea__textarea)",
+          "textarea": "textarea._27c9245, textarea.ds-textarea__textarea, textarea",
           "submit": "div.bf38813a > button[role=\"button\"]:has(div._17e543b), *:has(> * > textarea:not(.ds-textarea__textarea)) [role=\"button\"]:last-child",
-          "listenButtonContainers": "*:has(> .ds-message) > * > .ds-flex:has(> ._17e543b):not(:has(listen-button))",
+          "listenButtonContainers": ".ds-message ~ * .ds-flex:has(.ds-icon-button):not(:has(listen-button))",
           "playable": ".ds-message",
           "allPlayableNodes": ".ds-message",
           "loading": [
-            "div.ec4f5d61 > button[role=\"button\"][aria-disabled=\"true\"]",
+            "button[role=\"button\"][aria-disabled=\"true\"]",
             "[role=\"button\"] [class*=\"ds-loading\"]",
-            ".ds-loading"
+            ".ds-loading",
+            "button:has([class*=\"loading\"])",
+            "[aria-busy=\"true\"]"
           ],
           "streamPlayable": false,
           "extraStyles": [
-            "listen-button { width: 18px !important; height: 18px !important; }",
+            "listen-button { width: 18px !important; height: 18px !important; margin-top: -2px !important; margin-left: 5px !important; }",
             "*:has(> svg [d=\"M1.00008 2.41429C0.609551 2.02376 0.609551 1.3906 1.00008 1.00008C1.3906 0.609551 2.02376 0.609551 2.41429 1.00007L8.00008 6.58586L13.5859 1.00008C13.9764 0.609551 14.6096 0.609551 15.0001 1.00008C15.3906 1.3906 15.3906 2.02376 15.0001 2.41429L8.8486 8.56576C8.37997 9.03439 7.62018 9.03439 7.15155 8.56576L1.00008 2.41429Z\"]) { top: -80px !important; right: 0 !important; }"
           ],
           "integrationStyles": [
@@ -62,15 +64,23 @@
           "container": "*:has(> * > * > textarea)",
           "textarea": "textarea",
           "submit": "*:has(textarea) [class*=\"MessageSendButton\"]:not(:disabled)",
-          "listenButtonContainers": "*[class^=\"ChatMessage\"]:has(>[class*=\"LeftSideChatMessageHeader\"]) > [class*=\"LeftSideChatMessageHeader\"]:not(:has(listen-button))",
+          "listenButtonContainers": "section[class*=\"ChatMessageActionBar\"]:not(:has(listen-button)), *[class^=\"ChatMessage\"]:has(>[class*=\"LeftSideMessageHeader\"]) [class*=\"ChatMessageActionBar\"]:not(:has(listen-button))",
           "playable": "[class*=\"Message_leftSideMessageBubble\"] [class*=\"Markdown_markdownContainer\"]",
           "allPlayableNodes": "[class*=\"Message_leftSideMessageBubble\"] [class*=\"Markdown_markdownContainer\"]",
-          "loading": "button[class*=\"ChatStopMessageButton\"]",
+          "loading": [
+            "button[class*=\"ChatStopMessageButton\"]",
+            "button[class*=\"StopMessageButton\"]",
+            "[class*=\"ChatBreakpoint_chatBreakpoint\"] [class*=\"ChatMessageInputContainer\"] button:has([class*=\"LoadingDots\"])",
+            "[aria-busy=\"true\"]",
+            "[class*=\"Message_animating\"]"
+          ],
+          "streamPlayable": false,
           "extraStyles": [
             "[class*=\"ChatMessageVoiceInputButton\"] { visibility: hidden; margin: 0 -7.5px; }",
             "aside { z-index: 0; }",
             "footer { margin-top: 20px; }",
-            "listen-button { display: flex; align-items: center; }",
+            "listen-button { display: flex; align-items: center; padding: 0 !important; margin: 0 !important; }",
+            "listen-button svg { width: 18px !important; height: 18px !important; }",
             "*[class^=\"ChatMessage\"]:has(>[class*=\"LeftSideChatMessageHeader\"]) [class*=\"DropdownMenuButton\"] > button { visibility: visible !important; }",
             "*:has(> * > * > textarea) { position: relative !important; }"
           ],
@@ -83,20 +93,26 @@
         }
       },
       {
-        "hostnames": ["chat.mistral.ai"],
+        "hostnames": ["chat.mistral.ai", "mistral.ai"],
         "rules": {
-          "container": "form:has(div[contenteditable=\"true\"])",
-          "textarea": "form div[contenteditable=\"true\"]",
-          "listenButtonContainers": ".flex > [id].group:has(.flex > div.prose) .flex:has(> button):not(:has(listen-button))",
-          "playable": ".flex > div[data-message-author-role]",
-          "allPlayableNodes": ".flex > div[data-message-author-role]",
-          "loading": "[class*=\"@container/message\"] .flex.w-full:has(textarea) .ml-auto button:has(.lucide-square):last-of-type",
+          "container": "form:has(div[contenteditable=\"true\"].ProseMirror)",
+          "textarea": "div[contenteditable=\"true\"].ProseMirror[data-placeholder]",
+          "submit": "button[aria-label=\"Voice Mode\"]",
+          "listenButtonContainers": "div[data-message-author-role=\"assistant\"] div:has(> button[aria-label=\"Like\"]):not(:has(listen-button))",
+          "playable": "div[data-message-author-role=\"assistant\"] div[data-message-part-type=\"answer\"]",
+          "allPlayableNodes": "div[data-message-author-role]",
+          "loading": [
+            "button[aria-label=\"Voice Mode\"][aria-busy=\"true\"]",
+            "div[data-message-author-role=\"assistant\"]:not(:has(div[data-message-part-type=\"answer\"]))",
+            "[aria-busy=\"true\"]"
+          ],
+          "streamPlayable": true,
           "extraStyles": [
-            ".flex.h-fit.w-full:has(> [id]) { padding-bottom: 25px !important; }",
-            "listen-button { opacity: 0.65; }"
+            "listen-button { padding: 7px !important; }",
+            "form:has(div.ProseMirror) { position: relative !important; }"
           ],
           "integrationStyles": [
-            ".controls { top: -42.5px !important; right: 0 !important; }"
+            ".controls { position: absolute !important; top: -50px !important; right: 0px !important; z-index: 9999 !important; }"
           ],
           "messageRole": {
             "rules": [
@@ -132,20 +148,27 @@
       {
         "hostnames": ["grok.com"],
         "rules": {
-          "container": "form:has(div[contenteditable=\"true\"])",
-          "textarea": "form div[contenteditable=\"true\"]",
+          "container": ".query-bar",
+          "textarea": ".tiptap[contenteditable=\"true\"], div[contenteditable=\"true\"], textarea",
+          "submit": "form button:has(svg):not(:disabled):not([aria-label*=\"voice\"]):not([aria-label*=\"Voice\"])",
           "listenButtonContainers": ".flex-row > .-ml-4.flex:has(> button):not(:has(listen-button))",
           "playable": ".message-bubble[class*=\"prose\"]",
           "allPlayableNodes": ".message-bubble[class*=\"prose\"]",
-          "loading": "form button.group:has(.aspect-square.bg-button-filled):not([type=\"submit\"])",
+          "loading": [
+            "form button.group:has(.aspect-square.bg-button-filled):not([type=\"submit\"])",
+            "form button:has([data-icon=\"stop\"])",
+            "form button[aria-label*=\"Stop\"]",
+            "[aria-busy=\"true\"]",
+            ".message-bubble[class*=\"streaming\"]"
+          ],
+          "streamPlayable": false,
           "extraStyles": [
             "listen-button { padding: 7px !important; }",
-            "form:has(div[contenteditable=\"true\") { max-width: 800px; width: 100%; }",
-            "form:has(div[contenteditable=\"true\") > *:first-child { width: 100%; }",
-            ".flex-row > .-ml-4.flex:has(> button) button { opacity: 1 !important; }"
+            ".flex-row > .-ml-4.flex:has(> button) button { opacity: 1 !important; }",
+            ".query-bar { position: relative !important; overflow: visible !important; }"
           ],
           "integrationStyles": [
-            ".controls { top: -40px !important; right: 0 !important; }"
+            ".controls { position: absolute !important; top: -40px !important; right: 10px !important; z-index: 9999 !important; }"
           ],
           "messageRole": {
             "rules": [
@@ -165,7 +188,7 @@
           "loading": "button:has([fonticon=\"stop\"])",
           "streamPlayable": false,
           "extraStyles": [
-            "listen-button { padding: 7px !important; margin-right: 100%; margin-top: 5px; }"
+            "listen-button { padding: 7px !important; margin-right: 100%; margin-top: 0px; }"
           ],
           "integrationStyles": [
             ".controls { top: -40px !important; right: 0 !important; }"
@@ -198,6 +221,36 @@
             "rules": []
           }
         }
+      },
+      {
+        "hostnames": ["www.meta.ai"],
+        "rules": {
+          "container": "div[data-pagelet=\"KadabraPrivateComposer\"]",
+          "textarea": "div[data-lexical-editor=\"true\"][contenteditable=\"true\"]",
+          "submit": "div[aria-label=\"Send\"][role=\"button\"]",
+          "listenButtonContainers": "div:has(> div > span > div[aria-label=\"Copy\"][role=\"button\"]):not(:has(listen-button))",
+          "playable": "div.html-div[tabindex=\"-1\"]",
+          "allPlayableNodes": "div.html-div",
+          "loading": [
+            "div[aria-label*=\"Stop\"][role=\"button\"]",
+            "div[aria-disabled=\"true\"][aria-label=\"Send\"]",
+            "[aria-busy=\"true\"]"
+          ],
+          "streamPlayable": true,
+          "extraStyles": [
+            "listen-button { padding: 7px !important; }",
+            "div[data-pagelet=\"KadabraPrivateComposer\"] { position: relative !important; }"
+          ],
+          "integrationStyles": [
+            ".controls { position: absolute !important; top: -45px !important; right: 10px !important; z-index: 9999 !important; }"
+          ],
+          "messageRole": {
+            "rules": [
+              { "getAttributeValue": "data-message-author-role" }
+            ]
+          }
+        }
       }
     ]
 }
+
