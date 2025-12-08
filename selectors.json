@@ -1,5 +1,5 @@
 {
-    "version": "4",
+    "version": "5",
     "entries": [
       {
         "hostnames": ["chatgpt.com", "chat.openai.com"],
@@ -31,16 +31,17 @@
         "hostnames": ["chat.deepseek.com"],
         "rules": {
           "container": "div.aaff8b8f, *:has(> * > textarea.ds-textarea__textarea)",
-          "textarea": "textarea._27c9245, textarea.ds-textarea__textarea, textarea",
-          "submit": "div.bf38813a > button[role=\"button\"]:has(div._17e543b), *:has(> * > textarea:not(.ds-textarea__textarea)) [role=\"button\"]:last-child",
+          "textarea": "textarea._27c9245, textarea.ds-textarea__textarea, textarea[placeholder*=\"DeepSeek\"]",
+          "submit": "div.bf38813a [role=\"button\"]:has(svg path[d^=\"M8.3125\"]):not([aria-disabled=\"true\"]):not(.ds-icon-button--disabled)",
           "listenButtonContainers": ".ds-message ~ * .ds-flex:has(.ds-icon-button):not(:has(listen-button))",
           "playable": ".ds-message",
           "allPlayableNodes": ".ds-message",
           "loading": [
-            "button[role=\"button\"][aria-disabled=\"true\"]",
+            "div.bf38813a [role=\"button\"][aria-disabled=\"true\"]:has(svg path[d^=\"M8.3125\"])",
+            ".dad65929 > div:has(.ds-message):last-child:not(:has(.ds-markdown))",
             "[role=\"button\"] [class*=\"ds-loading\"]",
             ".ds-loading",
-            "button:has([class*=\"loading\"])",
+            "[class*=\"animate-spin\"]",
             "[aria-busy=\"true\"]"
           ],
           "streamPlayable": false,
@@ -53,7 +54,8 @@
           ],
           "messageRole": {
             "rules": [
-              { "hasClass": "d29f3d7d", "role": "user" }
+              { "hasClass": "d29f3d7d", "role": "user" },
+              { "hasClass": "_4f9bf79", "role": "assistant" }
             ]
           }
         }
@@ -98,15 +100,20 @@
           "container": "form:has(div[contenteditable=\"true\"].ProseMirror)",
           "textarea": "div[contenteditable=\"true\"].ProseMirror[data-placeholder]",
           "submit": "button[aria-label=\"Voice Mode\"]",
-          "listenButtonContainers": "div[data-message-author-role=\"assistant\"] div:has(> button[aria-label=\"Like\"]):not(:has(listen-button))",
+          "listenButtonContainers": "div[data-message-author-role=\"assistant\"] .flex.flex-row.items-center.gap-2:has(> button[aria-label=\"Like\"]):not(:has(listen-button))",
           "playable": "div[data-message-author-role=\"assistant\"] div[data-message-part-type=\"answer\"]",
           "allPlayableNodes": "div[data-message-author-role]",
           "loading": [
-            "button[aria-label=\"Voice Mode\"][aria-busy=\"true\"]",
+            "button[aria-label=\"Stop\"]",
+            "button[aria-label*=\"stop\"]",
+            "button[aria-label*=\"Stop\"]",
             "div[data-message-author-role=\"assistant\"]:not(:has(div[data-message-part-type=\"answer\"]))",
-            "[aria-busy=\"true\"]"
+            "[aria-busy=\"true\"]",
+            ".lucide-loader",
+            "[class*=\"animate-spin\"]",
+            "button:has(.sonner-loading-wrapper)"
           ],
-          "streamPlayable": true,
+          "streamPlayable": false,
           "extraStyles": [
             "listen-button { padding: 7px !important; }",
             "form:has(div.ProseMirror) { position: relative !important; }"
@@ -149,30 +156,31 @@
         "hostnames": ["grok.com"],
         "rules": {
           "container": ".query-bar",
-          "textarea": ".tiptap[contenteditable=\"true\"], div[contenteditable=\"true\"], textarea",
-          "submit": "form button:has(svg):not(:disabled):not([aria-label*=\"voice\"]):not([aria-label*=\"Voice\"])",
-          "listenButtonContainers": ".flex-row > .-ml-4.flex:has(> button):not(:has(listen-button))",
-          "playable": ".message-bubble[class*=\"prose\"]",
-          "allPlayableNodes": ".message-bubble[class*=\"prose\"]",
+          "textarea": ".tiptap[contenteditable=\"true\"], div[contenteditable=\"true\"].ProseMirror",
+          "submit": "button[type=\"submit\"][aria-label=\"Submit\"]:not([disabled])",
+          "listenButtonContainers": ".action-buttons .flex.items-center.gap-\\[2px\\]:not(:has(listen-button))",
+          "playable": "div[id^=\"response-\"].items-start .response-content-markdown",
+          "allPlayableNodes": "div[id^=\"response-\"] .message-bubble",
           "loading": [
-            "form button.group:has(.aspect-square.bg-button-filled):not([type=\"submit\"])",
-            "form button:has([data-icon=\"stop\"])",
-            "form button[aria-label*=\"Stop\"]",
-            "[aria-busy=\"true\"]",
-            ".message-bubble[class*=\"streaming\"]"
+            "button[aria-label=\"Stop\"]",
+            "button[aria-label*=\"stop\"]",
+            "[data-generating=\"true\"]",
+            ".action-buttons:not(.last-response)",
+            "[aria-busy=\"true\"]"
           ],
-          "streamPlayable": false,
+          "streamPlayable": true,
           "extraStyles": [
             "listen-button { padding: 7px !important; }",
             ".flex-row > .-ml-4.flex:has(> button) button { opacity: 1 !important; }",
             ".query-bar { position: relative !important; overflow: visible !important; }"
           ],
           "integrationStyles": [
-            ".controls { position: absolute !important; top: -40px !important; right: 10px !important; z-index: 9999 !important; }"
+            ".controls { position: absolute !important; top: -40px !important; right: 0px !important; z-index: 9999 !important; }"
           ],
           "messageRole": {
             "rules": [
-              { "tagNameEquals": "user-query-content", "role": "user" }
+              { "closestHasClass": "items-end", "role": "user" },
+              { "closestHasClass": "items-start", "role": "assistant" }
             ]
           }
         }
@@ -188,7 +196,7 @@
           "loading": "button:has([fonticon=\"stop\"])",
           "streamPlayable": false,
           "extraStyles": [
-            "listen-button { padding: 7px !important; margin-right: 100%; margin-top: 0px; }"
+            "listen-button { padding: 7px !important; margin-right: 100%; margin-top: 5px; }"
           ],
           "integrationStyles": [
             ".controls { top: -40px !important; right: 0 !important; }"
@@ -209,7 +217,10 @@
           "listenButtonContainers": "[class*=\"thread\"] .flex.justify-between .flex:nth-child(2):has(button):not(:has(listen-button))",
           "playable": "[id*=\"markdown-content\"]",
           "allPlayableNodes": "[id*=\"markdown-content\"]",
-          "loading": "[data-testid=\"stop-button\"]",
+          "loading": [
+            "button[data-testid=\"submit-button\"][disabled]",
+            "[class*=\"animate-pplxIndicator\"]"
+          ],
           "streamPlayable": false,
           "extraStyles": [
             "listen-button { padding: 7px !important; }"
