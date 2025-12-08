@@ -196,7 +196,7 @@
           "loading": "button:has([fonticon=\"stop\"])",
           "streamPlayable": false,
           "extraStyles": [
-            "listen-button { padding: 7px !important; margin-right: 100%; margin-top: 5px; }"
+            "listen-button { padding: 7px !important; margin-right: 100%; margin-top: 0px; }"
           ],
           "integrationStyles": [
             ".controls { top: -40px !important; right: 0 !important; }"
