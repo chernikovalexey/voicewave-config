@@ -33,17 +33,16 @@
           "container": "div.aaff8b8f, *:has(> * > textarea.ds-textarea__textarea)",
           "textarea": "textarea._27c9245, textarea.ds-textarea__textarea, textarea[placeholder*=\"DeepSeek\"]",
           "submit": "div.bf38813a [role=\"button\"]:has(svg path[d^=\"M8.3125\"]):not([aria-disabled=\"true\"]):not(.ds-icon-button--disabled)",
-          "listenButtonContainers": ".ds-message ~ * .ds-flex:has(.ds-icon-button):not(:has(listen-button))",
-          "playable": ".ds-message",
+          "listenButtonContainers": ".dad65929 > *:last-child .ds-flex .ds-flex:has(> .ds-icon-button):not(:has(listen-button))",
+          "playable": ".dad65929 > *:last-child .ds-message .ds-markdown",
           "allPlayableNodes": ".ds-message",
-          "loading": [
-            "div.bf38813a [role=\"button\"][aria-disabled=\"true\"]:has(svg path[d^=\"M8.3125\"])",
-            ".dad65929 > div:has(.ds-message):last-child:not(:has(.ds-markdown))",
-            "[role=\"button\"] [class*=\"ds-loading\"]",
-            ".ds-loading",
-            "[class*=\"animate-spin\"]",
-            "[aria-busy=\"true\"]"
-          ],
+      "loading": [
+        ".dad65929 > *:last-child .ds-message:not(:has(~ .ds-theme))",
+        "[role=\"button\"] [class*=\"ds-loading\"]",
+        ".ds-loading",
+        "[class*=\"animate-spin\"]",
+        "[aria-busy=\"true\"]"
+      ],
           "streamPlayable": false,
           "extraStyles": [
             "listen-button { width: 18px !important; height: 18px !important; margin-top: -2px !important; margin-left: 5px !important; }",
@@ -54,8 +53,8 @@
           ],
           "messageRole": {
             "rules": [
-              { "hasClass": "d29f3d7d", "role": "user" },
-              { "hasClass": "_4f9bf79", "role": "assistant" }
+              { "closestHasClass": "d29f3d7d", "role": "user" },
+              { "hasChild": ".ds-markdown", "role": "assistant" }
             ]
           }
         }
@@ -264,4 +263,3 @@
       }
     ]
 }
-
