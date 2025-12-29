@@ -1,5 +1,5 @@
 {
-    "version": "5",
+    "version": "6",
     "entries": [
       {
         "hostnames": ["chatgpt.com", "chat.openai.com"],
@@ -53,8 +53,8 @@
           ],
           "messageRole": {
             "rules": [
-              { "closestHasClass": "d29f3d7d", "role": "user" },
-              { "hasChild": ".ds-markdown", "role": "assistant" }
+              { "hasChild": ".ds-markdown", "role": "assistant" },
+              { "closestHasClass": "d29f3d7d", "role": "user" }
             ]
           }
         }
@@ -62,18 +62,19 @@
       {
         "hostnames": ["poe.com"],
         "rules": {
-          "container": "*:has(> * > * > textarea)",
-          "textarea": "textarea",
-          "submit": "*:has(textarea) [class*=\"MessageSendButton\"]:not(:disabled)",
-          "listenButtonContainers": "section[class*=\"ChatMessageActionBar\"]:not(:has(listen-button)), *[class^=\"ChatMessage\"]:has(>[class*=\"LeftSideMessageHeader\"]) [class*=\"ChatMessageActionBar\"]:not(:has(listen-button))",
-          "playable": "[class*=\"Message_leftSideMessageBubble\"] [class*=\"Markdown_markdownContainer\"]",
+          "container": "[class*=\"ChatMessageInputContainer_inputContainer\"]",
+          "textarea": "textarea[class*=\"GrowingTextArea_textArea\"]",
+          "submit": "button[data-button-send=\"true\"]:not([disabled])",
+          "listenButtonContainers": "[class*=\"ChatMessageActionBar_actionBar\"]:not(:has(listen-button))",
+          "playable": "[class*=\"Message_leftSideMessageBubble\"] [class*=\"Markdown_markdownContainer\"] [class*=\"Prose_prose\"]",
           "allPlayableNodes": "[class*=\"Message_leftSideMessageBubble\"] [class*=\"Markdown_markdownContainer\"]",
           "loading": [
             "button[class*=\"ChatStopMessageButton\"]",
             "button[class*=\"StopMessageButton\"]",
             "[class*=\"ChatBreakpoint_chatBreakpoint\"] [class*=\"ChatMessageInputContainer\"] button:has([class*=\"LoadingDots\"])",
             "[aria-busy=\"true\"]",
-            "[class*=\"Message_animating\"]"
+            "[class*=\"Message_animating\"]",
+            "[class*=\"ChatMessage\"][data-complete=\"false\"]"
           ],
           "streamPlayable": false,
           "extraStyles": [
@@ -82,14 +83,18 @@
             "footer { margin-top: 20px; }",
             "listen-button { display: flex; align-items: center; padding: 0 !important; margin: 0 !important; }",
             "listen-button svg { width: 18px !important; height: 18px !important; }",
-            "*[class^=\"ChatMessage\"]:has(>[class*=\"LeftSideChatMessageHeader\"]) [class*=\"DropdownMenuButton\"] > button { visibility: visible !important; }",
-            "*:has(> * > * > textarea) { position: relative !important; }"
+            "[class*=\"ChatMessage\"]:has([class*=\"LeftSideMessageHeader\"]) [class*=\"DropdownMenuButton\"] > button { visibility: visible !important; }",
+            "[class*=\"ChatMessageInputContainer_inputContainer\"] { position: relative !important; }"
           ],
           "integrationStyles": [
-            ".controls { top: -42.5px !important; right: 4px !important; }"
+            ".controls { top: -42.5px !important; right: 0 !important; }"
           ],
           "messageRole": {
-            "rules": []
+            "rules": [
+              { "hasChild": "[class*=\"LeftSideMessageHeader\"]", "role": "assistant" },
+              { "closestHasClass": "Message_rightSideMessageBubble", "role": "user" },
+              { "closestHasClass": "Message_leftSideMessageBubble", "role": "assistant" }
+            ]
           }
         }
       },
@@ -208,17 +213,16 @@
         }
       },
       {
-        "hostnames": ["www.perplexity.ai"],
+        "hostnames": ["www.perplexity.ai", "perplexity.ai"],
         "rules": {
           "container": "[class*=\"rounded-2xl\"]:has(#ask-input)",
-          "textarea": "#ask-input",
-          "submit": "button[data-testid=\"submit-button\"]:not(:disabled)",
-          "listenButtonContainers": "[class*=\"thread\"] .flex.justify-between .flex:nth-child(2):has(button):not(:has(listen-button))",
-          "playable": "[id*=\"markdown-content\"]",
-          "allPlayableNodes": "[id*=\"markdown-content\"]",
+          "textarea": "#ask-input, div[contenteditable=\"true\"][role=\"textbox\"][id=\"ask-input\"]",
+          "submit": "button[data-testid=\"submit-button\"]:not([disabled])",
+          "listenButtonContainers": ".gap-x-xs.flex.flex-shrink-0.items-center:has(button[aria-label=\"Helpful\"]):not(:has(listen-button))",
+          "playable": "[id^=\"markdown-content-\"] .prose",
+          "allPlayableNodes": "[id^=\"markdown-content-\"]",
           "loading": [
-            "button[data-testid=\"submit-button\"][disabled]",
-            "[class*=\"animate-pplxIndicator\"]"
+            ".gap-y-md:has([id^=\"markdown-content-\"]):not(:has(button[aria-label=\"Helpful\"]))"
           ],
           "streamPlayable": false,
           "extraStyles": [
